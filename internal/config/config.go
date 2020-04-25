@@ -7,6 +7,8 @@ import (
 )
 
 type DBConfig struct {
+	Host string
+	Port string
 	User string
 	Password string
 	Database string
@@ -21,6 +23,8 @@ func Init() {
 
 func GetDBConfig() DBConfig {
 	config := DBConfig {
+		Host: os.Getenv("db.host"),
+		Port: os.Getenv("db.port"),
 		User: os.Getenv("db.user"),
 		Password: os.Getenv("db.password"),
 		Database: os.Getenv("db.database"),

@@ -1,15 +1,21 @@
 package model
 
 type ProductType struct {
-	tableName struct{} `pg:"PRODUCT_TYPES"`
 	Id int
 	Name string
 }
 
+func (ProductType) TableName() string {
+	return "product_types"
+}
+
 type Product struct {
-	tableName struct{} `pg:"PRODUCTS"`
 	Id int
-	Uuid string `pg:unique`
+	Uuid string `gorm:"not null;unique"`
 	Name string
-	ProductType int
+	Type ProductType `gorm:"foreignkey:PRODUCT_TYPE"`
+}
+
+func (Product) TableName() string {
+	return "products"
 }
