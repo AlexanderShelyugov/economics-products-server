@@ -14,8 +14,6 @@ func main() {
 
 
 func productsHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-
 	products := model.GetProducts()
 	js, err := json.Marshal(products)
 	if err != nil {
@@ -23,5 +21,6 @@ func productsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 	w.Write(js)
 }
