@@ -5,7 +5,7 @@ import (
 	"github.com/go-pg/pg/v9"
 )
 
-func GetProducts() {
+func GetProducts() []Product {
     db := pg.Connect(&pg.Options{
 		User: "postgres",
 		Password: "postgres",
@@ -25,4 +25,5 @@ func GetProducts() {
 	for _, product := range products {
 		fmt.Printf("%+v\n", product)
 	}
+	return products
 }
