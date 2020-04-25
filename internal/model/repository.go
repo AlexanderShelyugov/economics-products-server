@@ -1,15 +1,16 @@
 package model
 
 import (
-	"fmt"
 	"github.com/go-pg/pg/v9"
+	"economics/products/internal/config"
 )
 
 func GetProducts() []Product {
+	config := config.GetDBConfig()
     db := pg.Connect(&pg.Options{
-		User: "postgres",
-		Password: "postgres",
-		Database: "economics-products",
+		User: config.User,
+		Password: config.Password,
+		Database: config.Database,
     })
     defer db.Close()
 
