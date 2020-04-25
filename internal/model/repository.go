@@ -1,32 +1,28 @@
-package repository
+package model
 
 import (
-	"os"
-	"github.com/jackc/pgx/v4"
-)
-
-const (
-	querySelectAll = "SELECT * FROM PRODUCTS"
+	"fmt"
+	"github.com/go-pg/pg/v9"
 )
 
 func GetProducts() {
-	conn, err := pgx.Connect(context.Background(), os.Getenv("DATABASE_URL"))
+    db := pg.Connect(&pg.Options{
+		User: "postgres",
+		Password: "postgres",
+		Database: "economics-products",
+    })
+    defer db.Close()
+
+	var products []Product
+	err := db.Model(&products).
+		// Column("PRODUCTS.*").
+		// Relation("ProductType").
+		Join("JOIN PRODUCT_TYPES t ON t.ID = product.PRODUCT_TYPE").
+		Select()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
+		panic(err)
 	}
-	defer conn.Close(context.Background())
-
-	rows, _ := conn.Query(context.Background(), querySelectAll)
-	for rows.Next() {
-		var id uint
-		var name string
-		var productType uint
-		var weight float
-
-		err := rows.Scan(&id, &name, &productType, &weight)
-		
+	for _, product := range products {
+		fmt.Printf("%+v\n", product)
 	}
-
-	fmt.Println(name, weight)
 }

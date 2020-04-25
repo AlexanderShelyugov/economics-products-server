@@ -1,13 +1,15 @@
 package model
 
 type ProductType struct {
-	id uint,
-	name string
+	tableName struct{} `pg:"PRODUCT_TYPES"`
+	Id int
+	Name string
 }
 
 type Product struct {
-	id uint,
-	name string,
-	productType ProductType,
-	weight float
+	tableName struct{} `pg:"PRODUCTS"`
+	Id int
+	Uuid string `pg:unique`
+	Name string
+	ProductType int
 }
