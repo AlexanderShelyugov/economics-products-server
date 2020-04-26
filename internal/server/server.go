@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"encoding/json"
 	"net/http"
+	"github.com/rs/cors"
 	"economics/products/internal/config"
 	"economics/products/internal/model"
 )
@@ -21,9 +22,11 @@ func NewServer(r *model.ProductRepository) *Server {
 }
 
 func (s Server) Run() {
-	http.HandleFunc("/products", s.productsHandler)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/products", s.productsHandler)
+	handler := cors.Default().Handler(mux)
 	port := fmt.Sprint(":", config.GetPort())
-	http.ListenAndServe(port, nil)
+	http.ListenAndServe(port, handler)
 }
 
 func (s Server) productsHandler(w http.ResponseWriter, r *http.Request) {
