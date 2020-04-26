@@ -2,7 +2,8 @@ package model
 
 type ProductType struct {
 	Id int
-	Name string
+	Uuid string `gorm:"not null;unique"`
+	Name string `gorm:"not null"`
 }
 
 func (ProductType) TableName() string {
@@ -12,7 +13,7 @@ func (ProductType) TableName() string {
 type Product struct {
 	Id int
 	Uuid string `gorm:"not null;unique"`
-	Name string
+	Name string `gorm:"not null"`
 	Type ProductType `gorm:"foreignkey:PRODUCT_TYPE"`
 }
 
