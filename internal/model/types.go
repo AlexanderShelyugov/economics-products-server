@@ -1,9 +1,9 @@
 package model
 
 type ProductType struct {
-	Id int
-	Uuid string `gorm:"not null;unique"`
-	Name string `gorm:"not null"`
+	Id uint `gorm:"primary_key" json:"-"`
+	Uuid string `gorm:"not null;unique" json:"id"`
+	Name string `gorm:"not null" json:"name"`
 }
 
 func (ProductType) TableName() string {
@@ -11,10 +11,12 @@ func (ProductType) TableName() string {
 }
 
 type Product struct {
-	Id int
-	Uuid string `gorm:"not null;unique"`
-	Name string `gorm:"not null"`
-	Type ProductType `gorm:"foreignkey:PRODUCT_TYPE"`
+	Id uint `gorm:"primary_key" json:"-"`
+	Uuid string `gorm:"not null;unique" json:"id"`
+	Name string `gorm:"not null" json:"name"`
+	ProductTypeId uint `json:"-"`
+	ProductType ProductType `json:"type"`
+	Weight float64 `json:"weight"`
 }
 
 func (Product) TableName() string {

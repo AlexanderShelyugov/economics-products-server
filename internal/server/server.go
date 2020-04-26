@@ -12,6 +12,10 @@ type Server struct {
 	productsRepo *model.ProductRepository
 }
 
+type Result struct {
+
+}
+
 func NewServer(r *model.ProductRepository) *Server {
 	return &Server{r}
 }
