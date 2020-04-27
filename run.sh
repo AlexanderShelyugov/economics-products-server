@@ -1,0 +1,1 @@
+docker run -d --rm -p 8100:8100 economics:server-products
