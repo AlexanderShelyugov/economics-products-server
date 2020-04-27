@@ -18,7 +18,6 @@ func Init() (*gorm.DB, error) {
 		" sslmode=disable",
 	)
 	db, err := gorm.Open("postgres", url)
-	db.LogMode(true)
 	if  err != nil {
 		return nil, err
 	}
