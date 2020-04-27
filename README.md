@@ -21,7 +21,7 @@ go build ./cmd/server.go
 
 ### Docker
 You have two options to build a Docker image.
-* If you have built a project according to [previous step](#Project), you can just run 
+* If you have built a project according to [the previous step](#Project), you can just run 
 ```
 docker build -f Dockerfile.lite -t economics:server-products
 ```
