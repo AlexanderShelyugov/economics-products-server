@@ -13,7 +13,7 @@ import (
 
 func runMigrations(config *config.DBConfig) {
 	url := fmt.Sprint("postgres://", config.User, ":", config.Password, "@", config.Host, ":", config.Port, "/", config.Database, "?sslmode=disable")
-	m, err := migrate.New("file://internal/model/migrations", url)
+	m, err := migrate.New("file://migrations", url)
 	if err != nil {
 		log.Fatal(err)
 	}
