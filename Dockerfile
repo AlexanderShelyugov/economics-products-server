@@ -1,6 +1,6 @@
 FROM golang:1.14.2-alpine AS build
 WORKDIR /app
-COPY go.mod
+COPY go.mod ./
 RUN go mod download
 ADD . ./
 RUN go build ./cmd/server.go

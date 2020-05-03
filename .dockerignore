@@ -1,4 +1,7 @@
 server
 .gitignore
 build.sh
+Dockerfile
+Dockerfile.lite
+README.md
 run.sh
